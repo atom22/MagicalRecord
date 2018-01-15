@@ -86,6 +86,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	}
 }
 
+#if TARGET_OS_IOS
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     if (![MagicalRecord isICloudEnabled]) return;
@@ -105,5 +106,6 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
                                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                 object:coordinator];
 }
+#endif
 
 @end

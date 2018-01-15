@@ -14,7 +14,9 @@
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
+#if TARGET_OS_IOS
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+#endif
 
 @end

@@ -75,11 +75,13 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
         [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
         iCloudSetupNotificationObserver = nil;
     }
-    
+	
+#if TARGET_OS_IOS
     if ([MagicalRecord isICloudEnabled]) 
     {
         [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
+#endif
 
     defaultManagedObjectContext_ = moc;
     [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
@@ -92,6 +94,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     }
     
     [moc MR_obtainPermanentIDsBeforeSaving];
+#if TARGET_OS_IOS
     if ([MagicalRecord isICloudEnabled])
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
@@ -106,6 +109,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
                                                                            [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
                                                                        }];        
     }
+#endif
     MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
 }
 
